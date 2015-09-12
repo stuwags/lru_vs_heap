@@ -96,7 +96,6 @@ if __name__ == "__main__":
     k = sys.argv[1]
     k = int(k)
     onlyfiles = [ f for f in listdir("./text") if isfile(join("./text",f)) ]
-    print onlyfiles
     count = 0
     if (sys.argv[2] == "lru"):
         lru = Lru();
@@ -104,10 +103,8 @@ if __name__ == "__main__":
             with open ("./text/" + f, 'r') as f:
                 for line in f:
                     for word in line.split():
-                        count += 1
                         lru.add_word(word)
-        print lru.get_k_words(k)
-        print "Number of words", count
+        lru.get_k_words(k)
 
     else:
         dict = {}
@@ -120,10 +117,8 @@ if __name__ == "__main__":
                         else:
                             dict[word] = 1
         heap = []
-        len(dict)
         for word, count in dict.iteritems():
             heap.append((count, word))
 
         heapq.heapify(heap)
         heapq.nlargest(k, heap)
-
